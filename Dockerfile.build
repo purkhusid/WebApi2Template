@@ -1,0 +1,16 @@
+#This image is used for building the app
+#Build: docker build -t WebApiTemplate-build -f Dockerfile.build .
+FROM msbuild
+SHELL ["powershell"]
+
+#Copy the source
+COPY . 'C:\\build\\'
+WORKDIR 'C:\\build\\'
+
+#Restore NuGet packages
+RUN ["nuget.exe", "restore"]
+
+#Build solution
+RUN msbuild WebApi2Template.sln
+
+CMD ["powershell"]

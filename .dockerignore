@@ -1,0 +1,17 @@
+#Git
+.gitattribute
+.gitignore
+
+#Docker
+Dockerfile.build
+Dockerfile
+Dockerignore
+
+#Jenkins
+Jenkinsfile
+
+#MSBuild artifacts
+*/bin
+
+#Nuget packages
+packages
