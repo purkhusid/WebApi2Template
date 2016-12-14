@@ -1,1 +1,1 @@
-echo 'hello from Pipeline 2'
+echo 'hello from Pipeline'
