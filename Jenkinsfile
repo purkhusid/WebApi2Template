@@ -8,6 +8,8 @@ node {
 
     stage 'Run tests'
     def buildEnv = docker.image("webapitemplate-build:${env.BUILD_TAG}").withRun { c ->
-        bat 'echo from container'
+        stage 'Run Unit Tests'
+        stage 'Run Integration Tests'
+        stage 'Run Acceptance Tests'
     }
 }
