@@ -7,7 +7,9 @@ node {
     bat "docker build -t webapitemplate-build:${env.BUILD_TAG} -f Dockerfile.build ."
     
     def buildEnv = docker.image("webapitemplate-build:${env.BUILD_TAG}")
-    myEnv.inside {
-        //Something
+    buildEnv.inside {
+        stage 'Run Unit Tests'
+        stage 'Run Integration Tests'
+        stage 'Run Acceptance Tests'
     }
 }
