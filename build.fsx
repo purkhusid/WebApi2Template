@@ -14,42 +14,43 @@ RestorePackages()
 Target "Clean" (fun _ ->
     CleanDirs [buildDir; testDir]
 )
-let buildApp =
+let buildApp () =
         !! "src/app/**/*.csproj"
         |> MSBuildRelease buildDir "Build"
         |> Log "AppBuild-Output: "
 
 Target "BuildApp" (fun _ ->
-    buildApp
+    buildApp()
 )
-let buildTests =
+let buildTests() =
         !! "src/tests/**/*.csproj"
         |> MSBuildDebug testDir "Build"
         |> Log "TestBuild-Output: "
 
 Target "BuildTest" (fun _ ->
-    buildTests
+    buildTests()
 )
-let runTests =
+let runTests() =
         !! (testDir + "/*Tests.dll")
         |> NUnit3 (fun p -> 
             {
                 p with
                     ToolPath = "tools/NUnit.ConsoleRunner/tools/nunit3-console.exe";
                     ShadowCopy = false;
-                    OutputDir = testDir + "TestResults.xml"
+                    OutputDir = testDir + "TestResults.xml";
             }
         )
 
 Target "Test" (fun _ ->
-    runTests
+    runTests()
 )
 
 Target "Watch" (fun _ ->
     use watcher = !! "src/**" |> WatchChanges (fun changes ->
-        buildApp
-        buildTests
-        runTests
+        tracefn "%A" changes
+        buildApp()
+        buildTests()
+        runTests()
     )
 
     System.Console.ReadLine() |> ignore
