@@ -1,0 +1,6 @@
+#Build: docker build -t WebApi2Template-dev -f Dockerfile.dev .
+#Run: docker run -d --name webapi2template -v /build/_PublishedWebsites/WebApi2Template:/inetpub/wwwroot -p 8000:80 webapi2template-dev
+FROM microsoft/aspnet:4.6.2
+VOLUME C:/inetpub/wwwroot
+# ARG site_root=.
+# ADD ${site_root} /inetpub/wwwroota

@@ -30,8 +30,6 @@ namespace WebApi2Template
             var settings = new ApiSettings()
             {
                 LifestyleType = LifestyleType.PerWebRequest,
-                MasterLogConnectionString = ConfigurationManager.ConnectionStrings["MasterLogDb"].ConnectionString,
-                IsProduction = Convert.ToBoolean(ConfigurationManager.AppSettings["isProduction"])
             };
 
             container.Install(new OrderApiInstaller(settings));

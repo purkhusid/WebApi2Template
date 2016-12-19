@@ -46,13 +46,14 @@ Target "Test" (fun _ ->
 )
 
 Target "Watch" (fun _ ->
-    use watcher = !! "src/**" |> WatchChanges (fun changes ->
+    use watcher = !! "src/**/*.cs" |> WatchChanges (fun changes ->
         tracefn "%A" changes
         buildApp()
         buildTests()
         runTests()
     )
 
+    Shell.Exec "docker"
     System.Console.ReadLine() |> ignore
 
     watcher.Dispose()
